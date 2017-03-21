@@ -89,6 +89,11 @@ grammar = {
 parser = Parser(tokens, grammar)
 interpreter = Interpreter()
 
+def calc_eval(text):
+    ast = parser.parse('PROGRAM', text)
+    return interpreter.visit(ast)
+
+
 _bold = '\033[;1m{}\033[0;0m'.format
 _red = '\033[1;31m{}\033[0;0m'.format
 
@@ -98,8 +103,7 @@ if __name__ == '__main__':
             text = input(_bold('> '))
             if not text:
                 continue
-            ast = parser.parse('PROGRAM', text)
-            rv = interpreter.visit(ast)
+            rv = calc_eval(text)
             if rv is not None:
                 print(' ', _bold(rv))
         except (KeyboardInterrupt, EOFError):
