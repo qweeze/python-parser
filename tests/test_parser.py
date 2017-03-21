@@ -36,7 +36,8 @@ def test_parser():
         'VALUE': anyof('STR', 'NUM', 'EXPR')
     }
     parser = Parser(patterns, grammar)
-    ast = parser.parse('EXPR', '(1, 2, ("test", (3, 4)))')
+    ast = parser.parse('EXPR', '(1, 2, ("test", ((3), 4)))')
+
 
     result = Node('EXPR', items=[
         Node('VALUE', [Token('NUM', '1')]),
@@ -45,7 +46,11 @@ def test_parser():
             Node('VALUE', [Token('STR', '"test"')]),
             Node('VALUE', items=[
                 Node('EXPR', items=[
-                    Node('VALUE', [Token('NUM', '3')]),
+                    Node('VALUE', items=[
+                        Node('EXPR', items=[
+                            Node('VALUE', [Token('NUM', '3')])
+                        ])
+                    ]),
                     Node('VALUE', [Token('NUM', '4')])
                 ])
             ])
