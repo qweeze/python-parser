@@ -1,4 +1,5 @@
 import pytest
+from python_parser import examples
 from python_parser.examples.calc import parser, interpreter, InterpreterError
 
 
