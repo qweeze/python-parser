@@ -16,9 +16,17 @@ tokens = (
 grammar = {
     'ROOT': anyof('ARR', 'OBJ'),
     'VAL': anyof('STR', 'NUM', 'ARR', 'OBJ', 'TRUE', 'FALSE', 'NULL'),
-    'ARR': a(skip('L_BR'), 'VAL', maybe(someof(skip('SEP'), 'VAL')), skip('R_BR')),
-    'OBJ': a(skip('L_PAR'), 'PAIR', maybe(someof(skip('SEP'), 'PAIR')), skip('R_PAR')),
-    'PAIR': a(anyof('STR', 'NUM'), skip('COL'), 'VAL')
+    'ARR': a(
+        skip('L_BR'),
+        maybe('VAL', maybe(someof(skip('SEP'), 'VAL'))),
+        skip('R_BR')
+    ),
+    'OBJ': a(
+        skip('L_PAR'),
+        maybe('PAIR', maybe(someof(skip('SEP'), 'PAIR'))),
+        skip('R_PAR')
+    ),
+    'PAIR': a('STR', skip('COL'), 'VAL')
 }
 
 parser = Parser(tokens, grammar)
@@ -35,7 +43,7 @@ def load(text):
     def val(node):
         node = node.items[0]
         return {
-            'STR': lambda t: t.value,
+            'STR': lambda t: t.value[1: -1],
             'NUM': lambda t: float(t.value),
             'TRUE': lambda _: True,
             'FALSE': lambda _: False,
