@@ -1,6 +1,6 @@
-import pytest
 import json
-from python_parser.examples.json_parser import load as json_loads
+
+from examples.json_parser import load as json_loads
 
 
 def test_json_loader():

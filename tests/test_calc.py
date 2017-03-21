@@ -1,6 +1,5 @@
 import pytest
-from python_parser import examples
-from python_parser.examples.calc import parser, interpreter, InterpreterError
+from examples.calc import parser, interpreter, InterpreterError
 
 
 def test_calc():
