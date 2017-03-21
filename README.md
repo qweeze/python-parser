@@ -4,7 +4,7 @@ A recursive descent parser generator
 [![Build Status](https://travis-ci.org/qweeze/python-parser.svg?branch=master)](https://travis-ci.org/qweeze/python-parser)
 
 ### Usage
-To create a parser you should provide a sequence of tokens and a BNF-like grammar. Here's a simple example of parsing an expressions with nested parentheses:
+To create a parser you should provide a sequence of tokens and a BNF-like grammar. Here's a simple example of parsing an expression with nested parentheses:
 ```python
 from python_parser import Parser, a, anyof, someof, maybe, skip, to_dot
 
