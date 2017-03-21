@@ -92,19 +92,20 @@ interpreter = Interpreter()
 _bold = '\033[;1m{}\033[0;0m'.format
 _red = '\033[1;31m{}\033[0;0m'.format
 
-while True:
-    try:
-        text = input(_bold('> '))
-        if not text:
-            continue
-        ast = parser.parse('PROGRAM', text)
-        rv = interpreter.visit(ast)
-        if rv is not None:
-            print(' ', _bold(rv))
-    except (KeyboardInterrupt, EOFError):
-        exit(0)
-    except SyntaxError as exc:
-        msg = traceback.format_exception_only(type(exc), exc)
-        print(_red(''.join(msg[3:] + msg[1:3])), end='')
-    except (ArithmeticError, InterpreterError) as exc:
-        print(_red(exc))
+if __name__ == '__main__':
+    while True:
+        try:
+            text = input(_bold('> '))
+            if not text:
+                continue
+            ast = parser.parse('PROGRAM', text)
+            rv = interpreter.visit(ast)
+            if rv is not None:
+                print(' ', _bold(rv))
+        except (KeyboardInterrupt, EOFError):
+            exit(0)
+        except SyntaxError as exc:
+            msg = traceback.format_exception_only(type(exc), exc)
+            print(_red(''.join(msg[3:] + msg[1:3])), end='')
+        except (ArithmeticError, InterpreterError) as exc:
+            print(_red(exc))
