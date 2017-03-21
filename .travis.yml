@@ -4,4 +4,4 @@ install:
   - travis_retry pip install pytest
   - travis_retry python setup.py install
 script:
-  - pytest
+  - pytest .
