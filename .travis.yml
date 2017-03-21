@@ -2,5 +2,6 @@ language: python
 python: '3.5'
 install:
   - travis_retry pip install pytest
+  - travis_retry pip install .
 script:
   - pytest
